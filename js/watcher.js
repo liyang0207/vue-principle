@@ -12,7 +12,7 @@ class Watcher {
     return value;
   }
   update() {
-    // 值更新后，Observer的setter通过Dep容器通知watcher去update视图
+    // 值更新后，Observer的setter就会触发，就会执行dep.notify()，即通过Dep容器通知watcher去update视图
     let newValue = this.vm.$data[this.expr];
     let oldValue = this.value;
     if (newValue !== oldValue) {

@@ -17,6 +17,9 @@ class Observer {
       enumerable: true,
       configurable: false,
       get() {
+        if (Dependency.target) {
+          dep.addSub(Dependency.target);    // 添加订阅者watcher,应该是整个实例Watcher
+        }
         return value;
       },
       set(newValue) {
@@ -29,3 +32,4 @@ class Observer {
     })
   }
 }
+Dependency.target = null;
