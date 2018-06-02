@@ -8,7 +8,6 @@ class Dependency {
     console.log(this.subs);
   }
   notify() {
-    console.log(this.subs);
     this.subs.forEach((watch) => {
       watch.update();
     })
