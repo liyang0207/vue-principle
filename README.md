@@ -11,3 +11,5 @@ vue双向数据绑定原理，简单实现。
 4. 实现一个编译器`Complier`，编译器的作用是扫描和解析每一个节点`node`，先将节点转换为`fragment`（性能优化，一次性append所有节点至目标element内），再根据不同的节点类型`nodeType`，针对`v-model`、`v-text`、`{{message}}`做不同的处理，完成第一次的数据`message`填充（即初始化视图）；同时编译器还担当着初始化`Watcher`的任务，将`Watcher`添加到`Dependency`中去；
 
 流程总结：实例化MVVM时，先使用Object.defineProperty劫持每一个data数据，为每一个属性实例化一个Dependency；在编译页面的时候为每一个需要更新message的地方添加一个Watcher，即v-model="message"、v-text="message"和{{message}}，有一个算一个，将这些Watcher添加到Dependency中进行统一管理；在编译的时候我们还要为input添加一个事件监听addEventListener，这样input的输入值变化时，触发setter，在setter内调用Dep的notify()方法，循环调用每一个Watcher的update更新我们的视图（执行回调函数）。
+
+参考文章：[vue双向绑定原理分析](https://www.cnblogs.com/zhenfei-jiang/p/7542900.html)，[vue的双向绑定原理及实现](https://www.cnblogs.com/libin-1/p/6893712.html)
