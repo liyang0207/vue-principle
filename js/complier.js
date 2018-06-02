@@ -30,7 +30,7 @@ class Complier {
     })
   }
   textComplier(node) {
-    // 文本节点编译器{{message}}
+    // 文本节点编译器{{message}},跟v-text共用一个编译方法
     if ((/\{\{(.+)\}\}/).test(node.textContent)) {
       complierUnits.text(node, this.vm, RegExp.$1);
     }
@@ -49,9 +49,9 @@ class Complier {
 const complierUnits = {
   model (node, vm, expr) {
     let updateFn = this.updater.modelUpdater;
-    // 初始化的时候取一次值填充，这时候Watcher就添加到了Dep中?
+    // 初始化的时候取一次值填充，渲染页面数据
     updateFn && updateFn(node, vm.$data[expr]);
-    // 更新值的时候
+    // 实例化watcher(调用watcher),将watcher添加到Dep中，同时定义好回调函数（数据变化后干什么）
     new Watcher(vm, expr, function(newValue){
       updateFn && updateFn(node, newValue);
     });
@@ -63,6 +63,7 @@ const complierUnits = {
   text (node, vm, expr) {
     let updateFn = this.updater.textUpdater;
     updateFn && updateFn(node, vm.$data[expr]);
+    console.log('dep.target0');
     new Watcher(vm, expr, function(newValue){
       updateFn && updateFn(node, newValue);
     });
