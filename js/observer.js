@@ -18,6 +18,7 @@ class Observer {
       configurable: false,
       get() {
         if (Dependency.target) {
+          console.log('dep.target1')
           dep.addSub(Dependency.target);    // 添加订阅者watcher,应该是整个实例Watcher
         }
         return value;

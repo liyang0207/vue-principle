@@ -12,7 +12,9 @@
 </head>
 <body>
 <div id="app">
-  <span v-text="message"></span>
+  <h1>测试是是个<span>121332</span></h1>
+  <h2>测试</h2>
+  <!--<span v-text="message"></span>-->
   {{message}}
 </div>
 
@@ -23,6 +25,23 @@
       message: 'hello Vue!'
     }
   })
+  // let ele = document.getElementById('app');
+  // let vm = new MVVM({
+  //   message: 'hello Vue!'
+  // }, ele, 'message');
+  // setTimeout(function () {
+  //   console.log('值变化了');
+  //   vm.data.message = 'world';
+  // }, 2000);
+  // function MVVM(data, el, exp){
+  //   this.data = data;
+  //   new Observer(data);
+  //   el.innerHTML = this.data[exp];
+  //   new Watcher(this, exp, function (value) {
+  //     el.innerHTML = value;
+  //   })
+  //   return this;
+  // }
 </script>
 </body>
 </html>
